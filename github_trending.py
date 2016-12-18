@@ -11,9 +11,9 @@ def get_trending_repositories():
     parameters = \
         {'q': 'created:>={}'.format(week_ago.date()),
          'sort': 'stars', 'order': 'desc'}
-    r = requests.get(API_URL,
+    get_info_from_github = requests.get(API_URL,
                      params=parameters)
-    json_repositories = r.json()
+    json_repositories = get_info_from_github.json()
     top_20_repositories =  json_repositories['items'][:20]
     repositories = []
     for repo in top_20_repositories:
@@ -27,9 +27,9 @@ def get_trending_repositories():
 
 def get_open_issues_amount(repositories):
     for repos in repositories:
-        r = requests.get(API_ISSUES_URL.format(repos['owner'],repos['name']),
+        get_info_from_github = requests.get(API_ISSUES_URL.format(repos['owner'],repos['name']),
                          {'state' : 'open'})
-        issues = r.json()
+        issues = get_info_from_github.json()
         for issue in issues:
             issue_url = str(issue['html_url'])
             if 'issues' in issue_url:
