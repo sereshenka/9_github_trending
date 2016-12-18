@@ -12,7 +12,7 @@ def get_trending_repositories():
         {'q': 'created:>={}'.format(week_ago.date()),
          'sort': 'stars', 'order': 'desc'}
     get_info_from_github = requests.get(API_URL,
-                     params=parameters)
+                     parameters)
     json_repositories = get_info_from_github.json()
     top_20_repositories =  json_repositories['items'][:20]
     repositories = []
